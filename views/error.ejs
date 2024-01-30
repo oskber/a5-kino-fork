@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./partials/head') %>
+
+<body class="bg-body">
+    <main class="grid-20-1fr min-h-full w-full bg-primary absolute">
+        <%- include('./partials/sidebar', { active: 'None' }) %>
+            <h1 class="text-white text-3xl text-center m-auto"><%= message %></h1>
+    </main>
+</body>
+
+</html>
