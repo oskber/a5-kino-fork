@@ -3,7 +3,6 @@ import movieRouter from "../routes/movies.js";
 import aboutRouter from "../routes/about.js";
 import bookingRouter from "../routes/booking.js";
 import apiRouter from "../routes/api.js";
-import fetch from "node-fetch";
 
 
 const app = express();
