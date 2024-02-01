@@ -7,8 +7,15 @@
         <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
             <%- include('./partials/sidebar', { active: '/movies' }) %>
                 <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/' , showIntro:
-                    true }) %>
+                    true, showReviews: true }) 
+                    %>
         </main>
     </body>
-
+    <template id="reviewTemplate">
+        <li id="review__item" >
+        <p id="review__name"></p>
+        <p id="review__text"></p>
+        <span id="review__rating"></span>
+        </li>
+    </template>
 </html>
