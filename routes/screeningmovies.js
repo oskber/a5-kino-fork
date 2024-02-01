@@ -31,7 +31,16 @@ async function showMainScreenings(res) {
 
 
     })
-    res.json(screeningDates);
+
+    //Sort efter datum
+    const maxScreenings = [];
+    for (let i = 0; i < 10 && i < screeningDates.length; i++) {
+        const screenObjects = screeningDates[i];
+        maxScreenings.push(screenObjects);
+
+
+    }
+    res.json(maxScreenings);
 
 }
 
