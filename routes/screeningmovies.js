@@ -26,11 +26,11 @@ async function showMainScreenings(res) {
 
 
     const screeningDates = frontPageScreenings.filter((props) => {
-        return new Date(props.start_time) < fiveDaysLater
+        const startTime = new Date(props.start_time)
+        return startTime < fiveDaysLater && startTime > today;
 
 
     })
-    console.log(screeningDates);
     res.json(screeningDates);
 
 }
