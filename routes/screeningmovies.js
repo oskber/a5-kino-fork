@@ -7,7 +7,7 @@ async function showMainScreenings(res) {
 
     const frontPageScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
-        start_time: properties.attributes.start_time,
+        start_time: new Date(properties.attributes.start_time),
         room: properties.attributes.room,
 
         movie: {
@@ -20,8 +20,21 @@ async function showMainScreenings(res) {
 
         }
     }))
-    res.json(frontPageScreenings)
+    const today = new Date();
+    const fiveDaysLater = new Date(today);
+    fiveDaysLater.setDate(today.getDate() + 5)
+
+
+    const screeningDates = frontPageScreenings.filter((props) => {
+        return new Date(props.start_time) < fiveDaysLater
+
+
+    })
+    console.log(screeningDates);
+    res.json(screeningDates);
+
 }
+
 
 
 screeningRouter.get('/screenings', async (req, res) => {
