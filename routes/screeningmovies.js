@@ -2,10 +2,10 @@ import express from 'express';
 import { fetchScreenings } from '../utils/screeningUtils.js';
 const screeningRouter = express.Router();
 
-async function showMainScreenings(res) {
+async function mapScreenings() {
     const allScreenings = await fetchScreenings();
 
-    const frontPageScreenings = allScreenings.data.map(properties => ({
+    const updatedScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
         start_time: new Date(properties.attributes.start_time),
         room: properties.attributes.room,
@@ -19,20 +19,26 @@ async function showMainScreenings(res) {
             },
 
         }
+
     }))
+    return updatedScreenings;
+}
+
+async function frontpageScreening(res) {
     const today = new Date();
     const fiveDaysLater = new Date(today);
-    fiveDaysLater.setDate(today.getDate() + 5)
+    fiveDaysLater.setDate(today.getDate() + 10)
 
-
-    const screeningDates = frontPageScreenings.filter((props) => {
-        const startTime = new Date(props.start_time)
-        return startTime < fiveDaysLater && startTime > today;
+    const updatedScreenings = await mapScreenings();
+    const screeningDates = updatedScreenings.filter((props) => {
+        const movieStartTime = new Date(props.start_time)
+        return movieStartTime < fiveDaysLater && movieStartTime > today;
 
 
     })
 
-    //Sort efter datum
+
+
     const maxScreenings = [];
     for (let i = 0; i < 10 && i < screeningDates.length; i++) {
         const screenObjects = screeningDates[i];
@@ -42,8 +48,8 @@ async function showMainScreenings(res) {
     }
     res.json(maxScreenings);
 
-}
 
+}
 
 
 screeningRouter.get('/screenings', async (req, res) => {
@@ -53,8 +59,9 @@ screeningRouter.get('/screenings', async (req, res) => {
 
 
 
+
 screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
-    await showMainScreenings(res);
+    await frontpageScreening(res);
 })
 
 
