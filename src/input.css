@@ -3,45 +3,60 @@
 @tailwind utilities;
 
 :root {
-    --bg-primary: #123;
-    --bg-secondary: rgb(69, 92, 115);
+  --bg-primary: #123;
+  --bg-secondary: rgb(69, 92, 115);
 }
 
 body {
-    height: 100dvh;
+  height: 100dvh;
 }
 
 .active {
-    position: relative;
-    background-color: var(--bg-primary);
-    border-radius: 100vw 0 0 100vw;
+  position: relative;
+  background-color: var(--bg-primary);
+  border-radius: 100vw 0 0 100vw;
 }
 
 .active ::before,
 .active ::after {
-    --border-radius: 2rem;
-    content: "";
-    position: absolute;
-    width: var(--border-radius);
-    height: var(--border-radius);
-    right: 0;
-    background-color: var(--bg-secondary);
+  --border-radius: 2rem;
+  content: '';
+  position: absolute;
+  width: var(--border-radius);
+  height: var(--border-radius);
+  right: 0;
+  background-color: var(--bg-secondary);
 }
 
 .active ::before {
-    border-radius: 0 0 100vw 0;
-    top: calc(var(--border-radius) * -1);
-    box-shadow: 10px 10px 0 10px var(--bg-primary);
+  border-radius: 0 0 100vw 0;
+  top: calc(var(--border-radius) * -1);
+  box-shadow: 10px 10px 0 10px var(--bg-primary);
 }
 
 .active ::after {
-    border-radius: 0 100vw 0 0;
-    bottom: calc(var(--border-radius) * -1);
-    box-shadow: 10px -10px 0 10px var(--bg-primary);
-    
+  border-radius: 0 100vw 0 0;
+  bottom: calc(var(--border-radius) * -1);
+  box-shadow: 10px -10px 0 10px var(--bg-primary);
 }
 
 .grid-20-1fr {
-    display: grid;
-    grid-template-columns: 20rem 1fr;
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+}
+
+.review-rating input[type='radio'] {
+  display: none;
+}
+
+.review-rating label {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.review-rating input[type='radio']:checked + label,
+.review-rating input[type='radio']:hover + label,
+.review-rating input[type='radio']:checked:hover + label {
+  color: #ffcc00;
 }

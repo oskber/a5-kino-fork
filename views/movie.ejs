@@ -2,24 +2,27 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta lang="sv">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta lang="sv" />
     <title>Bihjografen</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/output.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/output.css" />
     <script src="/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/4c51990d8f.js" crossorigin="anonymous"></script>
 </head>
 
-    <body class="bg-body">
-        <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
-            <%- include('./partials/sidebar', { active: '/movies' }) %>
-                <section class="flex flex-col justify-center items-center">
-                    <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/' ,
-                        showIntro: true }) %>
+<body class="bg-body">
+    <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
+        <%- include('./partials/sidebar', { active: '/movies' }) %>
+            <section class="flex flex-col justify-center items-center">
+                <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/' , showIntro:
+                    true }) %>
+                    <div class="p-20">
                         <%- include('./partials/reviewForm', { reviewForm: true }) %>
-                </section>
-        </main>
-    </body>
+                    </div>
+            </section>
+    </main>
+</body>
 
 </html>
