@@ -27,7 +27,7 @@ async function mapScreenings() {
 async function frontpageScreening(res) {
     const today = new Date();
     const fiveDaysLater = new Date(today);
-    fiveDaysLater.setDate(today.getDate() + 10)
+    fiveDaysLater.setDate(today.getDate() + 5)
 
     const updatedScreenings = await mapScreenings();
     const screeningDates = updatedScreenings.filter((props) => {
@@ -39,6 +39,7 @@ async function frontpageScreening(res) {
 
 
 
+
     const maxScreenings = [];
     for (let i = 0; i < 10 && i < screeningDates.length; i++) {
         const screenObjects = screeningDates[i];
@@ -46,7 +47,13 @@ async function frontpageScreening(res) {
 
 
     }
-    res.json(maxScreenings);
+
+    maxScreenings.sort((a, b) => a.start_time - b.start_time);
+
+    if (!maxScreenings)
+        res.status(404).send('ingen data hittades');
+    else
+        res.status(200).json(maxScreenings);
 
 
 }
@@ -54,7 +61,13 @@ async function frontpageScreening(res) {
 
 screeningRouter.get('/screenings', async (req, res) => {
     const Screenings = await fetchScreenings()
-    res.json(Screenings);
+
+    res.status(200).json(Screenings);
+    if (!Screenings) {
+        res.status(404).send('Ingen data hittades')
+    }
+
+
 })
 
 
@@ -62,6 +75,7 @@ screeningRouter.get('/screenings', async (req, res) => {
 
 screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
     await frontpageScreening(res);
+
 })
 
 
