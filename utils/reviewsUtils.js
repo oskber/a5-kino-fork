@@ -1,4 +1,4 @@
-import { API_BASE } from "../routes/api";
+import { API_BASE } from "../routes/api.js";
 import fetch from "node-fetch";
 //Get reviews for each movie and select page
 export async function getReviews(id, page){
@@ -38,4 +38,13 @@ async function getReviewPageSize(size){
 
 })*/
 
-
+export async function postReview(id, review) {
+    const res = await fetch(`${API_BASE}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+    return res.json();
+}
