@@ -48,7 +48,6 @@ async function fetchReviews(path, page) {
 }
 
 async function renderReview(reviewsArr) {
-  console.log(reviewsArr)
   reviewsArr.forEach(obj => {
     const reviewTemplate = document.querySelector('#reviewTemplate');
     const temp = reviewTemplate.content.cloneNode(true);
