@@ -19,12 +19,13 @@ async function mapScreenings() {
             },
 
         }
-
     }))
+
     return updatedScreenings;
 }
 
 async function frontpageScreening(res) {
+    //Testa genom att sätta datum till typ 28
     const today = new Date();
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5)
@@ -32,20 +33,14 @@ async function frontpageScreening(res) {
     const updatedScreenings = await mapScreenings();
     const screeningDates = updatedScreenings.filter((props) => {
         const movieStartTime = new Date(props.start_time)
+        // Testa genom att göra tio filmer där några har visningsdatum fem dagar efter idag
         return movieStartTime < fiveDaysLater && movieStartTime > today;
-
-
     })
-
-
-
 
     const maxScreenings = [];
     for (let i = 0; i < 10 && i < screeningDates.length; i++) {
         const screenObjects = screeningDates[i];
         maxScreenings.push(screenObjects);
-
-
     }
 
     maxScreenings.sort((a, b) => a.start_time - b.start_time);
@@ -54,43 +49,38 @@ async function frontpageScreening(res) {
         res.status(404).send('ingen data hittades');
     else
         res.status(200).json(maxScreenings);
-
-
 }
 
 
 screeningRouter.get('/screenings', async (req, res) => {
-    const Screenings = await fetchScreenings()
+    try {
+        const Screenings = await fetchScreenings()
 
-    res.status(200).json(Screenings);
-    if (!Screenings) {
-        res.status(404).send('Ingen data hittades')
+
+        if (!Screenings) {
+            res.status(404).send('Ingen data hittades')
+        } else {
+            res.status(200).json(Screenings);
+        }
+    } catch (error) {
+        console.log('Error fetching screenings:', error);
+        res.status(500).send('Databasen verkar inte kunna hämta data.')
     }
 
-
 })
-
-
 
 
 screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
-    await frontpageScreening(res);
+    try {
+        await frontpageScreening(res)
+
+    } catch (error) {
+        console.log('Error fetching screenings', error)
+        res.status(500).send('Databasen verkar inte kunna hämta data.')
+
+    }
 
 })
-
-
-
-
-
-
-
-
-
-// Startsidan ska visa en lista på visningar de kommande dagarna. Listan ska laddas in med hjälp av webbläsarens fetch() EFTER att sidan har visats, d.v.s. inte renderas på servern.
-// Endast visningar för de kommande fem dagarna ska visas
-// Max 10 filmvisningar ska visas. Om det finns fler än 10 visningar de kommande fem dagarna ska bara så många dagar visas som resulterar i max 10 visningar.
-// Ovanstående logik ska programmeras på servern, och testas med hjälp av ett enhetstest och mockade datakällor
-
 
 
 
