@@ -8,8 +8,11 @@ export async function getReviewsSizeFive(id, page){
   const payload = await res.json();
     return payload.data.map((obj) => ({
     id: obj.id,
-    ...obj.attributes,
+    ...obj.attributes
   }));
 }
+
+//skriv här
+
 
 
