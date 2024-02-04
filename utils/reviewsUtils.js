@@ -14,5 +14,9 @@ export async function getReviewsSizeFive(id, page){
 
 //skriv här
 
+export async function getRating(id) {
+    const res = await fetch(`${API_BASE}/reviews?populate=movie&filters[movie]=${id}`);
+    const payload = await res.json();
 
+}
 
