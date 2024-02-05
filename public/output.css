@@ -673,11 +673,6 @@ video {
   border-radius: 0.25rem;
 }
 
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
 .bg-primary {
   background-color: var(--bg-primary);
 }
@@ -691,20 +686,16 @@ video {
      object-fit: cover;
 }
 
+.p-20 {
+  padding: 5rem;
+}
+
 .p-4 {
   padding: 1rem;
 }
 
 .p-8 {
   padding: 2rem;
-}
-
-.p-10 {
-  padding: 2.5rem;
-}
-
-.p-20 {
-  padding: 5rem;
 }
 
 .px-2 {

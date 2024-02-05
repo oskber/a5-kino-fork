@@ -6,6 +6,6 @@ import screeningRouter from './screeningmovies.js';
 export const API_BASE = 'https://plankton-app-xhkom.ondigitalocean.app/api';
 
 apiRouter.use(screeningRouter);
-apiRouter.use(reviewRouter)
+apiRouter.use(reviewRouter);
 
 export default apiRouter;

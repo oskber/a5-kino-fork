@@ -13,7 +13,7 @@ export async function getReviewsSizeFive(id, page) {
   }));
 }
 
-export async function postReview(id, review) {
+export async function postReview(review) {
   const res = await fetch(`${API_BASE}/reviews`, {
     method: 'POST',
     headers: {
@@ -22,5 +22,4 @@ export async function postReview(id, review) {
     body: JSON.stringify(review),
   });
   return res.json();
-  //console.log(review);
 }
