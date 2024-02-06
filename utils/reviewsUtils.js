@@ -14,9 +14,25 @@ export async function getReviewsSizeFive(id, page){
 
 //skriv här
 
-export async function getRating(id) {
-    const res = await fetch(`${API_BASE}/reviews?populate=movie&filters[movie]=${id}`);
-    const payload = await res.json();
-
+async function getMovieReview(id) {
+  const res = await fetch(`${API_BASE}/reviews?filters[movie]=${id}`);
+  const payload = await res.json();
+  return payload;
 }
 
+// async function get(id) {
+//     const res = await fetch(`${API_BASE}/reviews?populate=movie&filters[movie]=${id}`);
+//     const payload = await res.json();
+//     const modified = payload.data.map((obj) => ({
+//       id: obj.id,
+//       ...obj.attributes
+//     }));
+//     return modified;
+// }
+
+export async function getAverageRating(id) {
+  const reviews = await getMovieReview(id);
+  if (reviews.length >= 5) {
+
+  }
+}
