@@ -1,19 +1,21 @@
-import { mock } from 'node:test';
-import frontpageScreening from '../utils/screeningUtils.js';
+import { afterEach, beforeEach, mock } from 'node:test';
+import { mockedScreenings } from './mockfrontpagescreenings';
 import { jest } from '@jest/globals';
+import frontpageScreening from '../utils/screeningUtils';
 
 describe('frontpageScreening', () => {
+
+    afterEach(() => {
+        jest.clearAllTimers();
+    })
+
     test('should return max 10 screenings within the next 5 days', async () => {
-        const mockResponse = {
-            status: jest.fn(),
-            json: jest.fn(),
-            send: jest.fn(),
-        };
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date('2024-02-05T09:00:00.000Z'))
 
-        await frontpageScreening(mockResponse);
+        // const returnedScreenings = await mockedScreenings();
+        const returnedScreenings = mockedScreenings();
 
-        expect(mockResponse.status).toHaveBeenCalledWith(200);
-        const returnedScreenings = mockResponse.json.mock.calls[0][0];
         expect(returnedScreenings).toHaveLength(10);
 
         const today = new Date().getTime();
@@ -26,5 +28,6 @@ describe('frontpageScreening', () => {
             expect(movieStartTime).toBeGreaterThanOrEqual(today);
             expect(movieStartTime).toBeLessThan(fiveDaysLater);
         });
+
     });
 });

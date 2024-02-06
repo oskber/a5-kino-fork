@@ -35,7 +35,6 @@ export async function mapScreenings() {
 }
 
 export async function frontpageScreening(res) {
-    //Testa genom att sätta datum till typ 28
     const today = new Date();
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5)
@@ -43,7 +42,6 @@ export async function frontpageScreening(res) {
     const updatedScreenings = await mapScreenings();
     const screeningDates = updatedScreenings.filter((props) => {
         const movieStartTime = new Date(props.start_time)
-        // Testa genom att göra tio filmer där några har visningsdatum fem dagar efter idag
         return movieStartTime < fiveDaysLater && movieStartTime > today;
     })
 
@@ -59,8 +57,8 @@ export async function frontpageScreening(res) {
     if ((maxScreenings.length === 0))
         res.status(404).send('ingen data hittades');
     else
-        res.status(200)
-    res.json(maxScreenings);
+
+        res.status(200).json(maxScreenings);
 }
 
 export default frontpageScreening;
