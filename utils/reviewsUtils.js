@@ -13,11 +13,7 @@ export async function getReviewsSizeFive(id, page) {
     ...obj.attributes
   }))
 
-  let filteredArr = modifiedArr.filter((obj) => {
-
-    return obj.verified && (obj.comment || obj.rating);
-
-  })
+  let filteredArr = filterVerified(modifiedArr);
 
   filteredArr.forEach(function (obj) {
     obj.author === null ? obj.author = 'Okänd användare' : obj.author = obj.author;
@@ -28,16 +24,28 @@ export async function getReviewsSizeFive(id, page) {
     obj.rating === null ? obj.rating = '' : obj.rating = `Betyg: ${obj.rating}`;
   });
 
+  return paginateSizeFive(page, filteredArr)
+}
+//Function that paginates an array into pages with size 5
+export function paginateSizeFive(page, arr){
   const itemsPerPage = 5;
   const currentPage = page;
   let paginatedArr = []
 
-  for (let i = 0; i < filteredArr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (i >= (currentPage - 1) * itemsPerPage && i < currentPage * itemsPerPage) {
-      paginatedArr.push(filteredArr[i]);
+      paginatedArr.push(arr[i]);
     }
   }
   return paginatedArr;
+}
+//Function that filters out reviews that aren't verified
+export function filterVerified(arr){
+    return arr.filter((obj) => {
+
+    return obj.verified && obj.rating;
+
+  })
 }
 
 //skriv här
