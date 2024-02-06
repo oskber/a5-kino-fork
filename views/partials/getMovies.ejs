@@ -13,7 +13,7 @@
         <a class="px-4 py-2 mt-4 text-2xl font-bold text-white bg-secondary rounded hover:bg-secondary-hover" href="<%= href + movie.id %>"><%= hrefText %></a>
 
         <% if (showReviews) {%>
-            <div id="reviews" class="flex flex-col justify-between rounded-xl w-9/12 min-h-[540px] bg-secondary my-10">
+            <div id="reviews" class="flex flex-col justify-between rounded-xl max-w-3xl w-9/12 min-h-[540px] bg-secondary my-10">
                 <h2 class="text-primary text-3xl pt-3 font-bold">Recensioner</h2>
                 <ul id="reviews__list" class="reviewsListHeight flex flex-col align-start gap-1 p-3 mb-3">
                 </ul>
