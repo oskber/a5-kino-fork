@@ -1,20 +1,17 @@
 const currentPath = window.location.pathname;
-const pathId = currentPath.substring(8);
 let page = 1;
 const nextBtn = document.querySelector('#reviews__next');
 const prevBtn = document.querySelector('#reviews__prev');
+prevBtn.style.display = 'none';
 
-/*Conditional depending on current page path*/
-if (currentPath.includes('/movies/') && !pathId == '') {
-  prevBtn.style.display = 'none';
-  renderReview(await fetchReviews(currentPath, page));
+renderReview(await fetchReviews(currentPath, page));
 
-  /*Listener for next btn */
-  nextBtn.addEventListener('click', nextPage)
+/*Listener for next btn */
+nextBtn.addEventListener('click', nextPage)
 
-  /*Listener for previous btn */
-  prevBtn.addEventListener('click', prevPage)
-}
+/*Listener for previous btn */
+prevBtn.addEventListener('click', prevPage)
+
 /*Function for going to next page of reviews */
 async function nextPage() {
   disableBtn(nextBtn)
@@ -63,7 +60,7 @@ async function renderReview(reviewsArr) {
     noReviews.innerText = 'Det finns inga recensioner än!'
     noReviews.classList.add('text-primary', 'text-2xl', 'py-3', 'font-bold')
     document.querySelector('#reviews__list').appendChild(noReviews)
-    return 
+    return
   }
   if (nextArr.length < 1) {
     nextBtn.style.display = 'none';
@@ -83,9 +80,9 @@ async function renderReview(reviewsArr) {
     reviewrating.textContent = obj.rating;
     document.querySelector('#reviews__list').appendChild(temp);
   });
-} 
+}
 
-function disableBtn(btn){
+function disableBtn(btn) {
   btn.disabled = true;
   setTimeout(() => {
     btn.disabled = false;
