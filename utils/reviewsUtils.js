@@ -1,7 +1,6 @@
 import { API_BASE } from "../routes/api.js";
 import fetch from "node-fetch";
 
-
 /*Fetches all reviews for each movie from CMS then filters the data to remove
 all unverified or invalid reviews. Then the function paginates the array and sets 
 the pagesize to 5*/
