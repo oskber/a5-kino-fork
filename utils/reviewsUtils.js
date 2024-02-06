@@ -1,4 +1,5 @@
 import { API_BASE } from "../routes/api.js";
+import { imdbRating } from "../utils/omdbApiUtils.js"; 
 import fetch from "node-fetch";
 
 /*Fetches all reviews for each movie from CMS then filters the data to remove
@@ -53,7 +54,11 @@ export function filterVerified(arr){
 async function getMovieReview(id) {
   const res = await fetch(`${API_BASE}/reviews?filters[movie]=${id}`);
   const payload = await res.json();
-  return payload;
+  const modifiedArr = payload.data.map((obj) => ({
+    id: obj.id,
+    ...obj.attributes
+  }))
+  return modifiedArr;
 }
 
 // async function get(id) {
@@ -66,9 +71,14 @@ async function getMovieReview(id) {
 //     return modified;
 // }
 
-export async function getAverageRating(id) {
-  const reviews = await getMovieReview(id);
+export async function getAverageRating(id, imdbId) {
+  const reviewsList = await getMovieReview(id);
+  const reviews = reviewsList;
+  let averageRating, maxRating;
   if (reviews.length >= 5) {
-
+    let sumRating = 0;
+    
+  }else {
+    
   }
 }

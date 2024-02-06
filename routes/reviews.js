@@ -1,6 +1,7 @@
 import express from "express";
 import { getReviewsSizeFive } from "../utils/reviewsUtils.js";
 import { getAverageRating } from "../utils/reviewsUtils.js";
+import { imdbRating } from "../utils/omdbApiUtils.js"; 
 const reviewRouter = express.Router();
 
 reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
