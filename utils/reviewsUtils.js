@@ -14,12 +14,19 @@ export async function getReviewsSizeFive(id, page) {
 }
 
 export async function postReview(review) {
-  const res = await fetch(`${API_BASE}/reviews`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(review),
-  });
-  return res.json();
+  const author = review.data.author;
+  const rating = review.data.rating;
+
+  if (author && rating) {
+    const res = await fetch(`${API_BASE}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(review),
+    });
+    return res.json();
+  } else {
+    throw new Error('Invalid review data');
+  }
 }

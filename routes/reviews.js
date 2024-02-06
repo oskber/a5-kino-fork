@@ -15,8 +15,13 @@ reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
 });
 
 reviewRouter.post('/reviews', async (req, res) => {
-  await postReview(req.body);
-  res.send({ message: 'Success' });
+  
+  try {
+    await postReview(req.body);
+    res.send({ message: 'Success' });
+  } catch (error) {
+    res.status(400).send({ message: error.message }); 
+  }
 });
 
 export default reviewRouter;

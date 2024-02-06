@@ -22,7 +22,7 @@ async function handleReviewForm(event) {
       updatedAt: getCurrentDate(),
       createdBy: authorInput.value,
       updatedBy: authorInput.value,
-    }
+    },
   };
   const res = await fetch('/api/reviews', {
     method: 'POST',

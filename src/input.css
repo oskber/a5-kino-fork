@@ -60,3 +60,4 @@ body {
 .review-rating input[type='radio']:checked:hover + label {
   color: #ffcc00;
 }
+
