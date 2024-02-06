@@ -1,7 +1,7 @@
 import express from 'express';
 import { getReviewsSizeFive } from '../utils/reviewsUtils.js';
 import { postReview } from '../utils/reviewsUtils.js';
-import { STATUS_CODES } from 'http';
+
 const reviewRouter = express.Router();
 
 reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
