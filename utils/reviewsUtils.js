@@ -38,7 +38,7 @@ async function getReviewPageSize(size){
 
 })*/
 
-export async function postReview(id, review) {
+export async function postReview(review) {
     const res = await fetch(`${API_BASE}/reviews`, {
       method: 'POST',
       headers: {

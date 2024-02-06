@@ -7,7 +7,8 @@ async function handleReviewForm(event) {
   const commentInput = document.querySelector(".review-comment");
   const authorInput = document.querySelector(".review-author");
   const ratingInput = document.querySelector(".review-rating");
-  const title = document.querySelector(".movie-title");
+  const url = new URL(window.location.href);
+  const movieId = url.pathname.replace('/movies/', '');
 
   const review = {
     "data": {
@@ -15,7 +16,7 @@ async function handleReviewForm(event) {
       "rating": ratingInput.value,
       "author": authorInput.value,
       "verified": true,
-      "movie": title.textContent.trim(),
+      "movie": movieId,
       "createdAt": getCurrentDate(),
       "updatedAt": getCurrentDate(),
       "createdBy": authorInput.value,
@@ -29,6 +30,7 @@ async function handleReviewForm(event) {
     },
     body: JSON.stringify(review),
   })
+  form.reset();
 }
 
 function getCurrentDate() {

@@ -12,7 +12,7 @@ apiRouter.get('/api/movies/:id/reviews/:page', async (req, res) =>{
 });
 
 apiRouter.post('/reviews', async (req, res) => {
-  const payload = await postReview(req.params.id, req.body);
+  const payload = await postReview(req.body);
   res.send(payload);
 });
 
