@@ -1,42 +1,48 @@
 const currentPath = window.location.pathname;
 const pathId = currentPath.substring(8);
+let page = 1;
+const nextBtn = document.querySelector('#reviews__next');
+const prevBtn = document.querySelector('#reviews__prev');
 
-if (!pathId == '') {
-  document.querySelector('#reviews__prev').style.display = 'none';
-  let page = 1;
+/*Conditional depending on current page path*/
+if (currentPath.includes('/movies/') && !pathId == '') {
+  prevBtn.style.display = 'none';
   renderReview(await fetchReviews(currentPath, page));
 
-  document.querySelector('#reviews__next').addEventListener('click', async () => {
-    document.querySelector('#reviews__prev').style.display = 'block';
-    page++
-    let reviewArr = await fetchReviews(currentPath, page)
+  /*Listener for next btn */
+  nextBtn.addEventListener('click', nextPage)
 
-    if (reviewArr.length > 0) {
-      const reviewsNode = document.querySelector('#reviews__list')
-      while (reviewsNode.firstElementChild) {
-        reviewsNode.removeChild(reviewsNode.lastElementChild)
-      }
-      renderReview(await fetchReviews(currentPath, page));
-    } else {
-      page--;
-      document.querySelector('#reviews__next').style.display = 'none';
-    }
-  })
-
-  document.querySelector('#reviews__prev').addEventListener('click', async () => {
-    document.querySelector('#reviews__next').style.display = 'block';
-    page--
-      const reviewsNode = document.querySelector('#reviews__list')
-      while (reviewsNode.firstElementChild) {
-        reviewsNode.removeChild(reviewsNode.lastElementChild)
-      }
-      renderReview(await fetchReviews(currentPath, page));
-    if (page == 1){
-      document.querySelector('#reviews__prev').style.display = 'none';
-    }
-  })
+  /*Listener for previous btn */
+  prevBtn.addEventListener('click', prevPage)
 }
-
+/*Function for going to next page of reviews */
+async function nextPage() {
+  disableBtn(nextBtn)
+  prevBtn.style.display = 'block';
+  page++;
+  const reviewsNode = document.querySelector('#reviews__list')
+  while (reviewsNode.firstElementChild) {
+    reviewsNode.removeChild(reviewsNode.lastElementChild)
+  }
+  renderReview(await fetchReviews(currentPath, page));
+}
+/*Function for going to previous page of reviews */
+async function prevPage() {
+  disableBtn(prevBtn);
+  page--;
+  const reviewsNode = document.querySelector('#reviews__list')
+  while (reviewsNode.firstElementChild) {
+    reviewsNode.removeChild(reviewsNode.lastElementChild)
+  }
+  renderReview(await fetchReviews(currentPath, page));
+  if (page == 1) {
+    document.querySelector('#reviews__prev').style.display = 'none';
+    return
+  } else {
+    prevBtn.style.display = 'block';
+  }
+}
+/*Function for fetching reviews from API */
 async function fetchReviews(path, page) {
   const response = await fetch(`/api/${path}/reviews/${page}`);
   if (response.ok) {
@@ -46,8 +52,24 @@ async function fetchReviews(path, page) {
     throw new Error(`Something went wrong with the request. Error code: ${response.status}`)
   }
 }
-
+/*Function for rendering html template for each object of fetched array. 
+It also checks if the next fetched array is empty or not. If it is, it hides the nextBtn*/
 async function renderReview(reviewsArr) {
+  const nextPageNum = page + 1;
+  const nextArr = await fetchReviews(currentPath, nextPageNum);
+  if (reviewsArr.length < 1) {
+    nextBtn.style.display = 'none';
+    const noReviews = document.createElement('h2');
+    noReviews.innerText = 'Det finns inga recensioner än!'
+    noReviews.classList.add('text-primary', 'text-2xl', 'py-3', 'font-bold')
+    document.querySelector('#reviews__list').appendChild(noReviews)
+    return 
+  }
+  if (nextArr.length < 1) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'block';
+  }
   reviewsArr.forEach(obj => {
     const reviewTemplate = document.querySelector('#reviewTemplate');
     const temp = reviewTemplate.content.cloneNode(true);
@@ -61,6 +83,11 @@ async function renderReview(reviewsArr) {
     reviewrating.textContent = obj.rating;
     document.querySelector('#reviews__list').appendChild(temp);
   });
+} 
 
+function disableBtn(btn){
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.disabled = false;
+  }, 250);
 }
-
