@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 
-<%- include('./partials/head') %>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta lang="sv">
+    <title>Bihjografen</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/output.css'>
+    <script src="/renderReviews.js" type="module" defer></script>
+</head>
 
-    <body class="bg-body">
-        <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
-            <%- include('./partials/sidebar', { active: '/movies' }) %>
-                <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/' , showIntro:
-                    true }) %>
-        </main>
-    </body>
+<body class="bg-body">
+    <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
+        <%- include('./partials/sidebar', { active: '/movies' }) %>
+            <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/' , showIntro:
+                true, showReviews: true }) %>
+    </main>
+</body>
+<template id="reviewTemplate">
+    <li id="review__item"
+        class="reviewItem flex flex-col justify-center h-20 px-2 py-2 text-left rounded-sm text-base bg-primary text-white">
+        <p id="review__name" class="font-bold"></p>
+        <p id="review__text"></p>
+        <span id="review__rating" class="font-semibold"></span>
+    </li>
+</template>
 
 </html>
