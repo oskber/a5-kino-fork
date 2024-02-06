@@ -43,7 +43,7 @@ export function paginateSizeFive(page, arr){
 export function filterVerified(arr){
     return arr.filter((obj) => {
 
-    return obj.verified && obj.rating;
+    return obj.verified && (obj.rating || obj.rating === 0);
 
   })
 }
