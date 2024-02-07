@@ -18,7 +18,7 @@ reviewRouter.post('/reviews', async (req, res) => {
   
   try {
     await postReview(req.body);
-    res.send({ message: 'Success' });
+    res.status(200).send({ message: 'Success' });
   } catch (error) {
     res.status(400).send({ message: error.message }); 
   }
