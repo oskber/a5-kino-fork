@@ -31,7 +31,11 @@ screeningRouter.get('/screenings', async (req, res) => {
 
 screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
     try {
-        await frontpageScreening(res)
+        const maxScreenings = await frontpageScreening(fetchScreenings)
+        if ((maxScreenings.length === 0))
+            res.status(404).send('ingen data hittades');
+        else
+            res.status(200).json(maxScreenings);
 
     } catch (error) {
         console.log('Error fetching screenings', error)

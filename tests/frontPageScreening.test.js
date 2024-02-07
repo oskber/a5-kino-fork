@@ -1,7 +1,16 @@
 import { afterEach, beforeEach, mock } from 'node:test';
 import { mockedScreenings } from './mockfrontpagescreenings';
 import { jest } from '@jest/globals';
-import frontpageScreening from '../utils/screeningUtils';
+import { frontpageScreening } from '../utils/screeningUtils';
+import { mapScreenings, fetchScreenings } from '../utils/screeningUtils';
+import * as utils from '../utils/screeningUtils'
+import { mockData } from './frontPageMockData.js'
+
+const mockFunction = async () => {
+    return new Promise((resolve, reject) => {
+        resolve(mockData)
+    })
+}
 
 describe('frontpageScreening', () => {
 
@@ -9,25 +18,55 @@ describe('frontpageScreening', () => {
         jest.clearAllTimers();
     })
 
-    test('should return max 10 screenings within the next 5 days', async () => {
+    test('mapScreenings should return max 10 screenings within the next 5 days', async () => {
+
+        const updatedScreenings = await mapScreenings(mockFunction)
+        console.log(updatedScreenings);
+        // const screeningLogic = await mockedScreenings();
+        expect(updatedScreenings.length).toBeLessThanOrEqual(2)
+
+
+
+    });
+
+    test(' frontPageScreening should only show movies within the next 5 days', async () => {
+        // Arrange
         jest.useFakeTimers();
         jest.setSystemTime(new Date('2024-02-05T09:00:00.000Z'))
-
-        // const returnedScreenings = await mockedScreenings();
-        const returnedScreenings = mockedScreenings();
-
-        expect(returnedScreenings).toHaveLength(10);
-
         const today = new Date().getTime();
         let fiveDaysLater = new Date();
         fiveDaysLater.setDate(fiveDaysLater.getDate() + 5);
         fiveDaysLater = fiveDaysLater.getTime();
 
-        returnedScreenings.forEach(screening => {
+        // Act
+        const screeningLogic = await frontpageScreening(mockFunction);
+        console.log(screeningLogic);
+
+        // Assert
+        expect(screeningLogic).toHaveLength(2);
+
+        screeningLogic.forEach(screening => {
             const movieStartTime = new Date(screening.start_time).getTime();
             expect(movieStartTime).toBeGreaterThanOrEqual(today);
             expect(movieStartTime).toBeLessThan(fiveDaysLater);
         });
 
-    });
+
+    })
+
+    test('frontPageScreening shoud only show 10 movies or less.'), async () => {
+        //Arrange
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date('2024-02-05T09:00:00.000Z'))
+        //Act
+        const lengthLogic = await frontpageScreening(mockFunction);
+
+
+        //Assert
+        expect(lengthLogic).toBeLessThanOrEqual(10);
+    }
+
 });
+
+
+

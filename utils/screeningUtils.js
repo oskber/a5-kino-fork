@@ -12,9 +12,8 @@ export async function fetchScreenings() {
     }
 }
 
-export async function mapScreenings() {
-    const allScreenings = await fetchScreenings();
-
+export async function mapScreenings(getData) {
+    const allScreenings = await getData();
     const updatedScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
         start_time: new Date(properties.attributes.start_time),
@@ -34,12 +33,12 @@ export async function mapScreenings() {
     return updatedScreenings;
 }
 
-export async function frontpageScreening(res) {
+export async function frontpageScreening(getData) {
     const today = new Date();
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5)
 
-    const updatedScreenings = await mapScreenings();
+    const updatedScreenings = await mapScreenings(getData);
     const screeningDates = updatedScreenings.filter((props) => {
         const movieStartTime = new Date(props.start_time)
         return movieStartTime < fiveDaysLater && movieStartTime > today;
@@ -53,14 +52,9 @@ export async function frontpageScreening(res) {
 
     maxScreenings.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
 
-
-    if ((maxScreenings.length === 0))
-        res.status(404).send('ingen data hittades');
-    else
-
-        res.status(200).json(maxScreenings);
+    return maxScreenings
 }
 
-export default frontpageScreening;
+
 // populate = movie för att inkludera filmdata i varje screening
 // filters[movie] = X för att hämta visningar av film med id X
