@@ -9,6 +9,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/output.css'>
     <script src="/script.js" defer></script>
+    <script src="/renderReviews.js" type="module" defer></script>
 </head>
 
     <body class="bg-body">
@@ -21,5 +22,14 @@
                 </section>
         </main>
     </body>
+
+<template id="reviewTemplate">
+    <li id="review__item"
+        class="reviewItem flex flex-col justify-center h-20 px-2 py-2 text-left rounded-sm text-base bg-primary text-white">
+        <p id="review__name" class="font-bold"></p>
+        <p id="review__text"></p>
+        <span id="review__rating" class="font-semibold"></span>
+    </li>
+</template>
 
 </html>
