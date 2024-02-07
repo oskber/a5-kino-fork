@@ -17,10 +17,9 @@ class RenderScreenings {
 
         screenings.forEach(screening => {
             const screeningLi = document.createElement('li');
-            // Ta bort de sista 5 tecknen (sekunder och millisekunder) från start_time-strängen
-            const startTime = screening.start_time.slice(0, -5);
+            const startTime = screening.start_time.slice(0, -8);
             const startTimes = startTime.replace('T', ' ')
-            screeningLi.textContent = `${screening.movie.title} - ${startTimes} - salong: ${screening.room}`
+            screeningLi.textContent = `${screening.movie.title} - ${startTimes} - Salong: ${screening.room}`
             screeningsList.append(screeningLi);
         });
     }

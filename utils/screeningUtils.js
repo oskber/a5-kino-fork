@@ -62,5 +62,3 @@ export async function frontpageScreening(res) {
 }
 
 export default frontpageScreening;
-// populate = movie för att inkludera filmdata i varje screening
-// filters[movie] = X för att hämta visningar av film med id X
