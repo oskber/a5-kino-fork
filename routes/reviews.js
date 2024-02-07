@@ -1,5 +1,5 @@
 import express from "express";
-import { getReviewsSizeFive } from "../utils/reviewsUtils.js";
+import { getReviewsSizeFive, postReview } from "../utils/reviewsUtils.js";
 const reviewRouter = express.Router();
 
 reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
@@ -9,5 +9,9 @@ reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
 
 //Skriv här!
 
+reviewRouter.post('/reviews', async (req, res) => {
+  await postReview(req.body);
+  res.send({ message: 'Success' });
+});
 
 export default reviewRouter;
