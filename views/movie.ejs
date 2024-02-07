@@ -16,9 +16,8 @@
         <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
             <%- include('./partials/sidebar', { active: '/movies' }) %>
                 <section class="flex flex-col justify-center items-center">
-                    <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/' ,
-                        showIntro: true }) %>
-                        <%- include('./partials/reviewForm', { reviewForm: true }) %>
+                    <%- include('./partials/getMovies', { movies: [movie], hrefText: 'Boka' , href: '/booking/', showIntro: true, showReviews: true }) %>
+                    <%- include('./partials/reviewForm', { reviewForm: true }) %>
                 </section>
         </main>
     </body>
