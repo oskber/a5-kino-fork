@@ -1,9 +1,10 @@
 import express from "express";
+import cmsAdapter from "../src/cmsAdapt.js";
 import { getReviewsSizeFive, postReview } from "../utils/reviewsUtils.js";
 const reviewRouter = express.Router();
 
 reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
-  const payload = await getReviewsSizeFive(req.params.id, req.params.page)
+  const payload = await getReviewsSizeFive(cmsAdapter ,req.params.id, req.params.page)
   res.json(payload);
 });
 
