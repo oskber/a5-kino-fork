@@ -3,25 +3,30 @@
 
 <%- include('./partials/head') %>
 
-<body class="bg-body">
-    <main class="grid-20-1fr min-h-full bg-primary absolute">
-        <%- include('./partials/sidebar', { active: '/'}) %>
-        <section>
-            <div class="flex flex-col items-center text-center justify-center h-screen">
-                <h1 class="text-6xl font-bold text-white">Välkommen till Bihjografen</h1>
-                <p class="text-2xl text-white w-2/3 py-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Facilis temporibus ut sit impedit deleniti fugiat placeat consequuntur explicabo inventore, aut,
-                    ullam repudiandae porro ducimus fuga nemo voluptas dolore incidunt tenetur.</p>
-                <p class="text-2xl text-white mt-16">Vi har öppet:</p>
-                <p class="text-2xl text-white">Måndag - Fredag: 10:00 - 22:00</p>
-                <p class="text-2xl text-white">Lördag - Söndag: 12:00 - 22:00</p>
-                <p class="text-2xl text-white mt-16">Här kan du se vilka filmer som visas hos oss</p>
-                <button
-                    class="px-4 py-2 mt-4 text-2xl font-bold text-white bg-secondary rounded hover:bg-secondary-hover"><a
-                        href="/movies">Se filmer</a></button>
-            </div>
-        </section>
-    </main>
-</body>
+    <body class="bg-body">
+        <main class="grid-20-1fr min-h-full bg-primary absolute">
+            <%- include('./partials/sidebar', { active: '/' }) %>
+                <section>
+                    <div class="flex flex-col items-center text-center justify-center h-screen">
+                        <h1 class="text-6xl font-bold text-white">Välkommen till Bihjografen</h1>
+                        <p class="text-2xl text-white w-2/3 py-4">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                            Facilis temporibus ut sit impedit deleniti fugiat placeat consequuntur explicabo inventore,
+                            aut,
+                            ullam repudiandae porro ducimus fuga nemo voluptas dolore incidunt tenetur.</p>
+                        <p class="text-2xl text-white mt-16">Vi har öppet:</p>
+                        <p class="text-2xl text-white">Måndag - Fredag: 10:00 - 22:00</p>
+                        <p class="text-2xl text-white">Lördag - Söndag: 12:00 - 22:00</p>
+                        <p class="text-2xl text-white mt-16">Här kan du se vilka filmer som visas hos oss</p>
+                        <button
+                            class="px-4 py-2 mt-4 text-2xl font-bold text-white bg-secondary rounded hover:bg-secondary-hover"><a
+                                href="/movies">Se filmer</a></button>
+                        <h1 class="text-3xl font-bold text-white">Kommande visningar!</h1>
+                        <ul class="screeningList"> </ul>
+                    </div>
+                </section>
+        </main>
+    </body>
+    <script src="frontPage.js"></script>
 
 </html>
