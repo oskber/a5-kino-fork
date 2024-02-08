@@ -1,7 +1,8 @@
 import express from 'express';
-import { fetchScreenings } from '../utils/screeningUtils.js';
-import { mapScreenings } from '../utils/screeningUtils.js';
+// import { fetchScreenings } from '../utils/screeningUtils.js';
+import { getAllScreenings, mapScreenings } from '../utils/screeningUtils.js';
 import { frontpageScreening } from '../utils/screeningUtils.js';
+import cmsAdapter from '../src/cmsAdapt.js';
 // import { fetchScreenings } from '../utils/screeningUtils.js';
 const screeningRouter = express.Router();
 
@@ -13,7 +14,7 @@ const screeningRouter = express.Router();
 
 screeningRouter.get('/screenings', async (req, res) => {
     try {
-        const Screenings = await fetchScreenings()
+        const Screenings = await getAllScreenings(cmsAdapter.fetchScreenings)
 
 
         if (!Screenings) {
@@ -31,7 +32,7 @@ screeningRouter.get('/screenings', async (req, res) => {
 
 screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
     try {
-        const maxScreenings = await frontpageScreening(fetchScreenings)
+        const maxScreenings = await frontpageScreening(cmsAdapter.fetchScreenings)
         if ((maxScreenings.length === 0))
             res.status(404).send('ingen data hittades');
         else

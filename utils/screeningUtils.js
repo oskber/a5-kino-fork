@@ -1,19 +1,14 @@
 import { API_BASE } from "../routes/api.js";
+import cmsAdapter from "../src/cmsAdapt.js";
 
 
-export async function fetchScreenings() {
-    try {
-        const response = await fetch(`${API_BASE}/screenings?populate=movie`);
-        const screenings = await response.json();
-        return screenings;
-    } catch (error) {
-        console.error('Error fetching screenings:', error);
-        throw error;
-    }
+export async function getAllScreenings() {
+    const screenings = cmsAdapter.fetchScreenings()
+    return screenings;
 }
 
-export async function mapScreenings(getData) {
-    const allScreenings = await getData();
+export async function mapScreenings(adapter) {
+    const allScreenings = await adapter();
     const updatedScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
         start_time: new Date(properties.attributes.start_time),
@@ -33,12 +28,12 @@ export async function mapScreenings(getData) {
     return updatedScreenings;
 }
 
-export async function frontpageScreening(getData) {
+export async function frontpageScreening(adapter) {
     const today = new Date();
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5)
 
-    const updatedScreenings = await mapScreenings(getData);
+    const updatedScreenings = await mapScreenings(adapter);
     const screeningDates = updatedScreenings.filter((props) => {
         const movieStartTime = new Date(props.start_time)
         return movieStartTime < fiveDaysLater && movieStartTime > today;

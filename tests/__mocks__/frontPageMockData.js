@@ -53,7 +53,7 @@ export const mockData = {
         {
             id: 203,
             attributes: {
-                start_time: "2024-02-06T12:45:00.000Z",
+                start_time: "2024-02-6T12:45:00.000Z",
                 room: "Stora salongen",
                 createdAt: "2023-05-25T13:09:54.278Z",
                 updatedAt: "2023-05-25T13:09:54.278Z",
