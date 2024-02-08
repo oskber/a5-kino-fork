@@ -27,7 +27,6 @@ describe('frontpageScreening', () => {
 
         // Act
         const screeningLogic = await frontpageScreening(mockFunction);
-        console.log(screeningLogic);
 
         // Assert
 
