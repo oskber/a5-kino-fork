@@ -68,6 +68,13 @@ async function renderReview(reviewsArr) {
     nextBtn.style.display = 'block';
   }
   reviewsArr.forEach(obj => {
+    obj.author === null ? obj.author = 'Okänd användare' : obj.author = obj.author;
+    obj.author === '' ? obj.author = 'Okänd användare' : obj.author = obj.author;
+
+    obj.comment === null ? obj.comment = '' : obj.comment = obj.comment;
+
+    obj.rating = `Betyg: ${obj.rating}`;
+
     const reviewTemplate = document.querySelector('#reviewTemplate');
     const temp = reviewTemplate.content.cloneNode(true);
     const reviewItem = temp.querySelector('#review__item');
