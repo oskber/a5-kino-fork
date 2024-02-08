@@ -3,12 +3,12 @@ import cmsAdapter from "../src/cmsAdapt.js";
 
 
 export async function getAllScreenings() {
-    const screenings = cmsAdapter.fetchScreenings()
+    const screenings = await cmsAdapter.fetchScreenings()
     return screenings;
 }
 
-export async function mapScreenings(adapter) {
-    const allScreenings = await adapter();
+export async function mapScreenings() {
+    const allScreenings = await cmsAdapter.fetchScreenings();
     const updatedScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
         start_time: new Date(properties.attributes.start_time),
@@ -29,11 +29,14 @@ export async function mapScreenings(adapter) {
 }
 
 export async function frontpageScreening(adapter) {
+    // Exempel const x = await adapter.fetchScreenings() hämta vilken property som helst från cms-adaptern.
+    // console.log(x);
+
     const today = new Date();
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5)
 
-    const updatedScreenings = await mapScreenings(adapter);
+    const updatedScreenings = await mapScreenings();
     const screeningDates = updatedScreenings.filter((props) => {
         const movieStartTime = new Date(props.start_time)
         return movieStartTime < fiveDaysLater && movieStartTime > today;

@@ -14,7 +14,7 @@ const screeningRouter = express.Router();
 
 screeningRouter.get('/screenings', async (req, res) => {
     try {
-        const Screenings = await getAllScreenings(cmsAdapter.fetchScreenings)
+        const Screenings = await getAllScreenings(cmsAdapter)
 
 
         if (!Screenings) {
@@ -32,7 +32,7 @@ screeningRouter.get('/screenings', async (req, res) => {
 
 screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
     try {
-        const maxScreenings = await frontpageScreening(cmsAdapter.fetchScreenings)
+        const maxScreenings = await frontpageScreening(cmsAdapter)
         if ((maxScreenings.length === 0))
             res.status(404).send('ingen data hittades');
         else
