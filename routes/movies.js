@@ -8,12 +8,13 @@ movieRouter.get("/:id", async (req, res) => {
   const id = req.params.id;
   const movie = await getMovieById(id);
 
-  const result = await getAverageRating(id);
   if (!movie.data) {
     res.status(404);
     res.render("error", { message: `No movie with ID ${id} found` });
     return;
   }
+  
+  const result = await getAverageRating(id);
 
   movie.data.rating = result.rating;
   movie.data.maxRating = result.maxRating;
