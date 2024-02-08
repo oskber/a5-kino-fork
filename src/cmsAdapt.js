@@ -6,6 +6,17 @@ const cmsAdapter = {
     const res = await fetch(`${API_BASE}/reviews?filters[movie]=${id}`)
     const payload = await res.json();
     return payload;
+  },
+  async postReview(review){
+    const res = await fetch(`${API_BASE}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+    console.log(res)
+    return res.json();
   }
 }
 

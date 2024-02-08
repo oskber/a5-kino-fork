@@ -15,7 +15,7 @@ const payload = await getAverageRating( req.params.id);
   res.status(200).json(payload);
 });
 reviewRouter.post('/reviews', async (req, res) => {
-  await postReview(req.body);
+  await postReview(cmsAdapter, req.body);
   res.send({ message: 'Success' });
 });
 

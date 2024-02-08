@@ -41,15 +41,8 @@ export function filterVerified(arr){
 
 //skriv här
 
-export async function postReview(review) {
-    const res = await fetch(`${API_BASE}/reviews`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(review)
-    })
-    return res.json();
+export async function postReview(cmsAdapter, review) {
+    await cmsAdapter.postReview(review);
 }
 
 async function getMovieReview(id) {
