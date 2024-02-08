@@ -1,13 +1,8 @@
 import { API_BASE } from "../routes/api.js";
 import cmsAdapter from "../src/cmsAdapt.js";
 
-
-export async function getAllScreenings() {
-    const screenings = await cmsAdapter.fetchScreenings()
-    return screenings;
-}
-
 export async function mapScreenings() {
+
     const allScreenings = await cmsAdapter.fetchScreenings();
     const updatedScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
@@ -53,6 +48,3 @@ export async function frontpageScreening(adapter) {
     return maxScreenings
 }
 
-
-// populate = movie för att inkludera filmdata i varje screening
-// filters[movie] = X för att hämta visningar av film med id X
