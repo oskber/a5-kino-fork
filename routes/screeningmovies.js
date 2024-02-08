@@ -30,7 +30,7 @@ screeningRouter.get('/screenings', async (req, res) => {
 })
 
 
-screeningRouter.get('/screenings/screeningsfrontpage', async (req, res) => {
+screeningRouter.get('/screenings/coming-screenings', async (req, res) => {
     try {
         const maxScreenings = await frontpageScreening(cmsAdapter)
         if ((maxScreenings.length === 0))
