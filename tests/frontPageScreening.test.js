@@ -3,7 +3,7 @@ import { jest } from '@jest/globals';
 import { frontpageScreening } from '../utils/screeningUtils';
 import { mapScreenings, fetchScreenings } from '../utils/screeningUtils';
 import * as utils from '../utils/screeningUtils'
-import { mockData } from './frontPageMockData.js'
+import { mockData } from './__mocks__/frontPageMockData.js'
 
 const mockFunction = async () => {
     return new Promise((resolve, reject) => {
