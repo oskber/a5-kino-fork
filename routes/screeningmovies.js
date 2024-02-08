@@ -8,29 +8,7 @@ const screeningRouter = express.Router();
 
 
 
-
-
-
-
-screeningRouter.get('/screenings', async (req, res) => {
-    try {
-        const Screenings = await getAllScreenings(cmsAdapter)
-
-
-        if (!Screenings) {
-            res.status(404).send('Ingen data hittades')
-        } else {
-            res.status(200).json(Screenings);
-        }
-    } catch (error) {
-        console.log('Error fetching screenings:', error);
-        res.status(500).send('Databasen verkar inte kunna hämta data.')
-    }
-
-})
-
-
-screeningRouter.get('/screenings/coming-screenings', async (req, res) => {
+screeningRouter.get('/coming-screenings', async (req, res) => {
     try {
         const maxScreenings = await frontpageScreening(cmsAdapter)
         if ((maxScreenings.length === 0))
