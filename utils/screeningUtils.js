@@ -1,20 +1,9 @@
 import { API_BASE } from "../routes/api.js";
-
-
-export async function fetchScreenings() {
-    try {
-        const response = await fetch(`${API_BASE}/screenings?populate=movie`);
-        const screenings = await response.json();
-        return screenings;
-    } catch (error) {
-        console.error('Error fetching screenings:', error);
-        throw error;
-    }
-}
+import cmsAdapter from "../src/cmsAdapt.js";
 
 export async function mapScreenings() {
-    const allScreenings = await fetchScreenings();
 
+    const allScreenings = await cmsAdapter.fetchScreenings();
     const updatedScreenings = allScreenings.data.map(properties => ({
         id: properties.id,
         start_time: new Date(properties.attributes.start_time),
@@ -34,7 +23,10 @@ export async function mapScreenings() {
     return updatedScreenings;
 }
 
-export async function frontpageScreening(res) {
+export async function frontpageScreening(adapter) {
+    // Exempel const x = await adapter.fetchScreenings() hämta vilken property som helst från cms-adaptern.
+    // console.log(x);
+
     const today = new Date();
     const fiveDaysLater = new Date(today);
     fiveDaysLater.setDate(today.getDate() + 5)
@@ -53,12 +45,6 @@ export async function frontpageScreening(res) {
 
     maxScreenings.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
 
-
-    if ((maxScreenings.length === 0))
-        res.status(404).send('ingen data hittades');
-    else
-
-        res.status(200).json(maxScreenings);
+    return maxScreenings
 }
 
-export default frontpageScreening;
