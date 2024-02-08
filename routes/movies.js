@@ -16,7 +16,7 @@ movieRouter.get("/:id", async (req, res) => {
   }
 
   movie.data.rating = result.rating;
-  movie.data.reviewsCount = result.reviewsCount;
+  movie.data.maxRating = result.maxRating;
 
   res.render("movie", { movie: movie.data });
 });
@@ -31,12 +31,11 @@ movieRouter.get("/", async (req, res) => {
 
   const moviesWithRatings = await Promise.all(
     movies.data.map(async (movie) => {
-      console.log(movie);
       const result = await getAverageRating(movie.id, movie.attributes.imdbId);
       return {
         ...movie,
         rating: result.rating,
-        reviewsCount: result.reviewsCount,
+        maxRating: result.maxRating,
       };
     })
   );

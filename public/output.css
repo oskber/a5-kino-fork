@@ -607,16 +607,6 @@ video {
   margin-bottom: 1rem;
 }
 
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}
-
-.mx-1\.5 {
-  margin-left: 0.375rem;
-  margin-right: 0.375rem;
-}
-
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -625,8 +615,16 @@ video {
   margin-bottom: 0.75rem;
 }
 
+.me-1 {
+  margin-inline-end: 0.25rem;
+}
+
 .ml-4 {
   margin-left: 1rem;
+}
+
+.ms-2 {
+  margin-inline-start: 0.5rem;
 }
 
 .mt-16 {
@@ -635,14 +633,6 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.me-1 {
-  margin-inline-end: 0.25rem;
-}
-
-.ms-2 {
-  margin-inline-start: 0.5rem;
 }
 
 .block {
@@ -661,16 +651,12 @@ video {
   height: 5rem;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
-.h-1 {
-  height: 0.25rem;
-}
-
 .h-4 {
   height: 1rem;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .max-h-screen {
@@ -697,6 +683,10 @@ video {
   width: 9rem;
 }
 
+.w-4 {
+  width: 1rem;
+}
+
 .w-9\/12 {
   width: 75%;
 }
@@ -707,14 +697,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-1 {
-  width: 0.25rem;
-}
-
-.w-4 {
-  width: 1rem;
 }
 
 .min-w-60 {
@@ -793,21 +775,12 @@ video {
   border-radius: 0.75rem;
 }
 
-.rounded-full {
-  border-radius: 9999px;
-}
-
 .bg-primary {
   background-color: var(--bg-primary);
 }
 
 .bg-secondary {
   background-color: var(--bg-secondary);
-}
-
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
 .object-cover {
@@ -916,14 +889,14 @@ video {
   line-height: 1.75rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -932,10 +905,6 @@ video {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-medium {
-  font-weight: 500;
 }
 
 .text-primary {
@@ -950,10 +919,6 @@ video {
 .text-yellow-300 {
   --tw-text-opacity: 1;
   color: rgb(253 224 71 / var(--tw-text-opacity));
-}
-
-.underline {
-  text-decoration-line: underline;
 }
 
 :root {
@@ -1019,10 +984,6 @@ body {
   }
 }
 
-.hover\:no-underline:hover {
-  text-decoration-line: none;
-}
-
 @media (min-width: 640px) {
   .sm\:text-lg {
     font-size: 1.125rem;
@@ -1055,11 +1016,6 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:bg-gray-400 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-  }
-
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));

@@ -69,7 +69,7 @@ export async function getAverageRating(id) {
     maxRating = 5;
 
     if (typeof averageRating === "number") {
-      averageRating = parseFloat(averageRating.toFixed(2));
+      averageRating = Math.ceil(averageRating * 10) / 10;
     } else {
       averageRating = 0;
     }
