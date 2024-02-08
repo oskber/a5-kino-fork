@@ -11,7 +11,7 @@ reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
 //Skriv här!
 
 reviewRouter.post('/reviews', async (req, res) => {
-  await postReview(req.body);
+  await postReview(cmsAdapter, req.body);
   res.send({ message: 'Success' });
 });
 
