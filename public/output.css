@@ -627,10 +627,6 @@ video {
   margin-top: 1rem;
 }
 
-.mt-20 {
-  margin-top: 5rem;
-}
-
 .block {
   display: block;
 }
@@ -649,10 +645,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.max-h-\[70\%\] {
-  max-height: 70%;
 }
 
 .max-h-screen {
@@ -827,13 +819,12 @@ video {
   padding-bottom: 1rem;
 }
 
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .pb-3 {
   padding-bottom: 0.75rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
 }
 
 .pl-4 {
@@ -842,14 +833,6 @@ video {
 
 .pt-3 {
   padding-top: 0.75rem;
-}
-
-.pt-8 {
-  padding-top: 2rem;
-}
-
-.pb-8 {
-  padding-bottom: 2rem;
 }
 
 .text-left {
