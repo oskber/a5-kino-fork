@@ -18,6 +18,7 @@ const cmsAdapter = {
     console.log(res)
     return res.json();
   },
+
   async fetchScreenings() {
     try {
       const response = await fetch(`${API_BASE}/screenings?populate=movie`);
@@ -27,6 +28,8 @@ const cmsAdapter = {
       console.error('Error fetching screenings:', error);
       throw error;
     }
+
+
   }
 
 
