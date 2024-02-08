@@ -45,6 +45,22 @@ body {
   grid-template-columns: 20rem 1fr;
 }
 
+
+.reviewsListHeight{
+    height: 425px;
+}
+
+.reviewItem{
+    animation: growIn 0.05s ease-in forwards;
+}
+
+@keyframes growIn{
+    0%{opacity: 0;
+    scale: 95%;}
+    100%{opacity: 1;
+    scale: 100%;}
+}
+
 .review-rating input[type='radio'] {
   display: none;
 }
