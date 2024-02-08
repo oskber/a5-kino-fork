@@ -65,15 +65,14 @@ async function getMovieReview(id) {
 export async function getAverageRating(id) {
   const reviewsList = await getMovieReview(id);
   const imdbRes =  await imdbRating(id);
-  const reviews = reviewsList;
   let averageRating, maxRating;
-  if (reviews.length >= 5) {
+  if (reviewsList.length >= 5) {
     let sumRatings = 0;
-    reviews.forEach((review) => {
+    reviewsList.forEach((review) => {
       sumRatings += review.rating;
     }
     )
-    averageRating = sumRatings / reviews.length;
+    averageRating = sumRatings / reviewsList.length;
     maxRating = 5;
     console.log(averageRating);
   }else {
