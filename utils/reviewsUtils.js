@@ -74,7 +74,6 @@ export async function getAverageRating(id) {
     )
     averageRating = sumRatings / reviewsList.length;
     maxRating = 5;
-    console.log(averageRating);
   }else {
     averageRating = imdbRes;
     maxRating = 10;
