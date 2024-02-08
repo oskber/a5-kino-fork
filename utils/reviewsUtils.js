@@ -8,7 +8,7 @@ the pagesize to 5*/
 export async function getReviewsSizeFive(adapter,id, page) {
   const payload = await adapter.loadMoviesReviews(id);
 
-  const modifiedArr = payload.data.map((obj) => ({
+  const modifiedArr = payload.map((obj) => ({
     id: obj.id,
     ...obj.attributes
   }))
@@ -34,7 +34,7 @@ export function paginateSizeFive(page, arr){
 export function filterVerified(arr){
     return arr.filter((obj) => {
 
-    return obj.verified && (obj.rating || obj.rating === 0);
+      return obj.verified && (obj.rating || obj.rating === 0) && 0 <= obj.rating && obj.rating <= 5;
 
   })
 }
