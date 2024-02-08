@@ -53,7 +53,7 @@ export async function postReview(review) {
 }
 
 async function getMovieReview(id) {
-  const res = await fetch(`${API_BASE}/reviews?populate=movie&filters[movie]=${id}`);
+  const res = await fetch(`${API_BASE}/reviews?filters[movie]=${id}`);
   const payload = await res.json();
   const modifiedArr = payload.data.map((obj) => ({
     id: obj.id,
@@ -65,7 +65,6 @@ async function getMovieReview(id) {
 export async function getAverageRating(id) {
   const reviewsList = await getMovieReview(id);
   const imdbRes =  await imdbRating(id);
-  const imdb = imdbRes;
   const reviews = reviewsList;
   let averageRating, maxRating;
   if (reviews.length >= 5) {
@@ -78,7 +77,7 @@ export async function getAverageRating(id) {
     maxRating = 5;
     console.log(averageRating);
   }else {
-    averageRating = imdb;
+    averageRating = imdbRes;
     maxRating = 10;
   }
   let results = {
