@@ -1,7 +1,6 @@
 import express from "express";
 import { getReviewsSizeFive } from "../utils/reviewsUtils.js";
 import { getAverageRating } from "../utils/reviewsUtils.js";
-import { imdbRating } from "../utils/omdbApiUtils.js"; 
 const reviewRouter = express.Router();
 
 reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
@@ -11,8 +10,7 @@ reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
 
 //Skriv här!
 reviewRouter.get('/movies/:id/ratings', async (req, res) => {
- const payload = await getAverageRating(req.params.id)
-
+const payload = await getAverageRating( req.params.id);
   res.status(200).json(payload);
 });
 
