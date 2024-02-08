@@ -21,4 +21,10 @@ screeningRouter.get('/coming-screenings', async (req, res) => {
 
 })
 
+screeningRouter.get('/screenings/screenings-details-page/movies/:id', async (req, res) => {
+    const response = await fetch(`https://plankton-app-xhkom.ondigitalocean.app/api/screenings?filters[movie]=${req.params.id}`);
+    const payload = await response.json();
+    res.json(payload);
+});
+
 export default screeningRouter;

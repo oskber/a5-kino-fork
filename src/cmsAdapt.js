@@ -5,7 +5,7 @@ const cmsAdapter = {
   async loadMoviesReviews(id) {
     const res = await fetch(`${API_BASE}/reviews?filters[movie]=${id}`)
     const payload = await res.json();
-    return payload;
+    return payload.data;
   },
   async postReview(review) {
     const res = await fetch(`${API_BASE}/reviews`, {
