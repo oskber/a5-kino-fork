@@ -1,6 +1,6 @@
 async function getScreenings() {
     try {
-        const response = await fetch('http://localhost:5080/api/screenings/screeningsfrontpage');
+        const response = await fetch('http://localhost:5080/api/coming-screenings');
         const screenings = await response.json();
         console.log(screenings);
         return screenings;
