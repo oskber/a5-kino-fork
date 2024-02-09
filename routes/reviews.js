@@ -5,7 +5,11 @@ import { getAverageRating } from "../utils/reviewsUtils.js";
 const reviewRouter = express.Router();
 
 reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
-  const payload = await getReviewsSizeFive(cmsAdapter ,req.params.id, req.params.page)
+  const payload = await getReviewsSizeFive(
+    cmsAdapter,
+    req.params.id,
+    req.params.page
+  );
   res.json(payload);
 });
 
@@ -15,8 +19,12 @@ const payload = await getAverageRating( req.params.id);
 });
 
 reviewRouter.post('/reviews', async (req, res) => {
-  await postReview(cmsAdapter, req.body);
-  res.send({ message: 'Success' });
+  try {
+    await postReview(cmsAdapter, req.body);
+    res.status(200).send({ message: 'Success' });
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
 });
 
 export default reviewRouter;
