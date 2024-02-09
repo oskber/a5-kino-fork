@@ -34,6 +34,7 @@ export function paginateSizeFive(page, arr) {
   return paginatedArr;
 }
 //Function that filters out reviews that aren't verified
+
 export function filterVerified(arr){
     return arr.filter((obj) => {
 
@@ -41,8 +42,6 @@ export function filterVerified(arr){
 
   })
 }
-
-//skriv här
 
 export async function postReview(cmsAdapter, review) {
   await cmsAdapter.postReview(review);
