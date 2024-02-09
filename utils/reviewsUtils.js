@@ -34,18 +34,14 @@ export function paginateSizeFive(page, arr) {
   return paginatedArr;
 }
 //Function that filters out reviews that aren't verified
-export function filterVerified(arr) {
-  return arr.filter((obj) => {
-    return (
-      obj.verified &&
-      (obj.rating || obj.rating === 0) &&
-      0 <= obj.rating &&
-      obj.rating <= 5
-    );
-  });
-}
 
-//skriv här
+export function filterVerified(arr){
+    return arr.filter((obj) => {
+
+      return obj.verified && (obj.rating || obj.rating === 0) && 0 <= obj.rating && obj.rating <= 5;
+
+  })
+}
 
 export async function postReview(cmsAdapter, review) {
   await cmsAdapter.postReview(review);

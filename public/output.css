@@ -788,6 +788,10 @@ video {
      object-fit: cover;
 }
 
+.p-20 {
+  padding: 5rem;
+}
+
 .p-3 {
   padding: 0.75rem;
 }
@@ -939,7 +943,7 @@ body {
 .active ::before,
 .active ::after {
   --border-radius: 2rem;
-  content: "";
+  content: '';
   position: absolute;
   width: var(--border-radius);
   height: var(--border-radius);
@@ -984,6 +988,22 @@ body {
   }
 }
 
+.review-rating input[type='radio'] {
+  display: none;
+}
+
+.review-rating label {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.review-rating input[type='radio']:checked + label,
+.review-rating input[type='radio']:hover + label,
+.review-rating input[type='radio']:checked:hover + label {
+  color: #ffcc00;
+}
+
 @media (min-width: 640px) {
   .sm\:text-lg {
     font-size: 1.125rem;
@@ -1021,3 +1041,4 @@ body {
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
+

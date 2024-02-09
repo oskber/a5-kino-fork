@@ -1,8 +1,22 @@
 <div class="grid-1-1fr gap-y-8 min-h-100px w-100px bg-primary pb-8">
   <form class="review-form flex flex-col gap-4" name="review-form">
-    <textarea class="review-comment px-2 py-1" value="hello" placeholder="Skriv en kommentar" name="comment" required></textarea>
-    <input class="review-author px-2 py-1" name="author" placeholder="Ditt namn" value="" required>
-    <input class="review-rating px-2 py-1" type="number" min="0" max="5" value="3" required>
-    <button class="review-submit bg-secondary text-white text-lg font-bold rounded" type="submit">Skicka recension</button>
+    <textarea class="review-comment px-2 py-1" value="" placeholder="Skriv en kommentar" name="comment"></textarea>
+    <input class="review-author px-2 py-1" name="author" placeholder="Ditt namn" value="" required />
+      <div class="review-rating">
+        <input type="radio" id="star5" name="rating" value="1" />
+        <label for="star5" class="review__star"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star4" name="rating" value="2" />
+        <label for="star4" class="review__star"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star3" name="rating" value="3" />
+        <label for="star3" class="review__star"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star2" name="rating" value="4" />
+        <label for="star2" class="review__star"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star1" name="rating" value="5" />
+        <label for="star1" class="review__star"><i class="fas fa-star"></i></label>
+      </div>
+
+    <button class="review-submit bg-secondary text-white text-lg font-bold rounded" type="submit">
+      Skicka recension
+    </button>
   </form>
 </div>
