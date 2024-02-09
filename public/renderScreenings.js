@@ -1,6 +1,6 @@
 async function fetchScreenings() {
-  const id = window.location.pathname;
-  const response = await fetch(`/api/screenings/screenings-details-page${id}`);
+  const id = window.location.pathname.split("/").pop();
+  const response = await fetch(`/api/movies/${id}/screenings`);
   const payload = await response.json();
   return payload;
 }
