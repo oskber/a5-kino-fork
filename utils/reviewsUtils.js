@@ -1,6 +1,4 @@
-import { API_BASE } from "../routes/api.js";
 import { imdbRating } from "../utils/omdbApiUtils.js";
-import fetch from "node-fetch";
 
 /*Fetches all reviews for each movie from CMS then filters the data to remove
 all unverified or invalid reviews. Then the function paginates the array and sets 
@@ -47,28 +45,22 @@ export async function postReview(cmsAdapter, review) {
   await cmsAdapter.postReview(review);
 }
 
-async function getMovieReview(id) {
-  const res = await fetch(`${API_BASE}/reviews?filters[movie]=${id}`);
-  const payload = await res.json();
-  const modifiedArr = payload.data.map((obj) => ({
+export async function getAverageRating(adapter, id) {
+  const payload = await adapter.loadMoviesReviews(id);
+  const modifiedArr = payload.map((obj) => ({
     id: obj.id,
     ...obj.attributes,
   }));
-  return modifiedArr;
-}
-
-export async function getAverageRating(id) {
-  const reviewsList = await getMovieReview(id);
+  let filteredReviews = filterVerified(modifiedArr);
   const imdbRes = await imdbRating(id);
   let averageRating, maxRating;
-  if (reviewsList.length >= 5) {
+  if (filteredReviews.length >= 5) {
     let sumRatings = 0;
-    reviewsList.forEach((review) => {
+    filteredReviews.forEach((review) => {
       sumRatings += review.rating;
     });
-    averageRating = sumRatings / reviewsList.length;
+    averageRating = sumRatings / filteredReviews.length;
     maxRating = 5;
-
     if (typeof averageRating === "number") {
       averageRating = Math.ceil(averageRating * 10) / 10;
     } else {
@@ -78,6 +70,5 @@ export async function getAverageRating(id) {
     averageRating = imdbRes;
     maxRating = 10;
   }
-
   return { rating: averageRating, maxRating: maxRating };
 }
