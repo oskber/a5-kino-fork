@@ -1,6 +1,6 @@
 import express from "express";
 import cmsAdapter from "../src/cmsAdapt.js";
-import { getReviewsSizeFive, postReview } from "../utils/reviewsUtils.js";
+import { getReviewsSizeFive, postReview, validateReview } from "../utils/reviewsUtils.js";
 import { getAverageRating } from "../utils/reviewsUtils.js";
 const reviewRouter = express.Router();
 
@@ -15,8 +15,13 @@ const payload = await getAverageRating( req.params.id);
 });
 
 reviewRouter.post('/reviews', async (req, res) => {
+  const validated = await validateReview(req.body);
+  if (validated === false) {
+    res.status(400).send({ message: 'Invalid input' });
+  } else {
   await postReview(cmsAdapter, req.body);
   res.send({ message: 'Success' });
+  }
 });
 
 export default reviewRouter;
