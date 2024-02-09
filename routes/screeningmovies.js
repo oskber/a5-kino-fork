@@ -21,7 +21,7 @@ screeningRouter.get('/coming-screenings', async (req, res) => {
 
 })
 
-screeningRouter.get('/screenings-details-page/movies/:id', async (req, res) => {
+screeningRouter.get('/movies/:id/screenings', async (req, res) => {
     const payload = await movieScreening(req.params.id, cmsAdapter);
     res.json(payload);
 });

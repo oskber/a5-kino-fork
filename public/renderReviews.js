@@ -41,7 +41,7 @@ async function prevPage() {
 }
 /*Function for fetching reviews from API */
 async function fetchReviews(path, page) {
-  const response = await fetch(`/api/${path}/reviews/${page}`);
+  const response = await fetch(`/api/${path}/reviews/?page=${page}`);
   if (response.ok) {
     let payload = await response.json();
     return payload;

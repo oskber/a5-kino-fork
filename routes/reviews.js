@@ -4,11 +4,11 @@ import { getReviewsSizeFive, postReview, validateReview } from "../utils/reviews
 import { getAverageRating } from "../utils/reviewsUtils.js";
 const reviewRouter = express.Router();
 
-reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
+reviewRouter.get('/movies/:id/reviews', async (req, res) => {
   const payload = await getReviewsSizeFive(
     cmsAdapter,
     req.params.id,
-    req.params.page
+    req.query.page
   );
   res.json(payload);
 });
@@ -18,7 +18,7 @@ const payload = await getAverageRating(cmsAdapter, req.params.id);
   res.status(200).json(payload);
 });
 
-reviewRouter.post('/reviews', async (req, res) => {
+reviewRouter.post('/movies/:id/reviews', async (req, res) => {
   const validated = await validateReview(req.body);
   if (validated === false) {
     res.status(400).send({ message: 'Invalid input' });
