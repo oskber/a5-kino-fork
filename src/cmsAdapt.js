@@ -1,7 +1,6 @@
 import { API_BASE } from '../routes/api.js';
 import fetch from 'node-fetch';
 import { postReview } from '../utils/reviewsUtils.js';
-
 const cmsAdapter = {
   async loadMoviesReviews(id) {
 
