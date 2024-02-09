@@ -48,3 +48,21 @@ export async function frontpageScreening(adapter) {
     return maxScreenings
 }
 
+export function dateHasPassed(date, time) {
+    const hoursAndMinutes = time.split(":");
+    return (
+      date.setHours(hoursAndMinutes[0], hoursAndMinutes[1], 0, 0) <= Date.now()
+    );
+  }
+
+export async function movieScreening(id, adapter) {
+    const payload = await adapter.fetchMovieScreenings(id);
+    const filteredData = payload.data.filter(screening => {
+        const startTime = screening.attributes.start_time.slice(0, -8);
+        const startTimes = startTime.split("T");
+        const dateNotPassed = !dateHasPassed(new Date(startTimes[0]), startTimes[1]);
+        return dateNotPassed;
+    });
+    return filteredData;
+}
+
