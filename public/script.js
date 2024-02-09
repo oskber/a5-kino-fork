@@ -24,7 +24,7 @@ async function handleReviewForm(event) {
       updatedBy: authorInput.value,
     },
   };
-  const res = await fetch('/api/reviews', {
+  const res = await fetch(`/api/movies/${movieId}/reviews`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
