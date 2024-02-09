@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 
-<%- include('./partials/head') %>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta lang="sv">
+    <title>Bihjografen</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/output.css'>
+    <script src="/renderRatings.js" type="module" defer></script>
+</head>
 
 <body class="bg-body">
     <main class="grid-20-1fr gap-y-8 min-h-full w-full bg-primary absolute">
         <%- include('./partials/sidebar', { active: '/movies' }) %>
             <section class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 row-auto p-8">
-                <%- include('./partials/getMovies', { hrefText: 'Mer info', href: `/movies/`, showIntro: false, showReviews: false }) %>
+                <%- include('./partials/getMovies', { hrefText: 'Mer info' , href: `/movies/`, showIntro: false,
+                    showReviews: false }) %>
             </section>
     </main>
 </body>
