@@ -2,26 +2,31 @@ import { API_BASE } from "../routes/api.js";
 import cmsAdapter from "../src/cmsAdapt.js";
 
 export async function mapScreenings() {
+    try {
+        const allScreenings = await cmsAdapter.fetchScreenings();
+        console.log('All Screenings:', allScreenings); // Logga datan för felsökning
+        const updatedScreenings = allScreenings.map(properties => ({
+            id: properties.id,
+            start_time: new Date(properties.attributes.start_time),
+            room: properties.attributes.room,
 
-    const allScreenings = await cmsAdapter.fetchScreenings();
-    const updatedScreenings = allScreenings.data.map(properties => ({
-        id: properties.id,
-        start_time: new Date(properties.attributes.start_time),
-        room: properties.attributes.room,
+            movie: {
+                id: properties.attributes.movie.data.id,
+                title: properties.attributes.movie.data.attributes.title,
+                intro: properties.attributes.movie.data.attributes.intro,
+                image: {
+                    url: properties.attributes.movie.data.attributes.image.url
+                },
 
-        movie: {
-            id: properties.attributes.movie.data.id,
-            title: properties.attributes.movie.data.attributes.title,
-            intro: properties.attributes.movie.data.attributes.intro,
-            image: {
-                url: properties.attributes.movie.data.attributes.image.url
-            },
-
-        }
-    }))
-
-    return updatedScreenings;
+            }
+        }));
+        return updatedScreenings;
+    } catch (error) {
+        console.error('Error mapping screenings:', error);
+        throw error;
+    }
 }
+
 
 export async function frontpageScreening(adapter) {
     // Exempel const x = await adapter.fetchScreenings() hämta vilken property som helst från cms-adaptern.
