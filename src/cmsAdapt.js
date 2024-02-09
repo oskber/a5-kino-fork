@@ -15,7 +15,7 @@ const cmsAdapter = {
     const author = review.data.author;
     const rating = review.data.rating;
 
-       if (author && rating) {
+    if (author && rating) {
       const res = await fetch(`${API_BASE}/reviews`, {
         method: 'POST',
         headers: {
@@ -27,18 +27,28 @@ const cmsAdapter = {
     } else {
       throw new Error('Invalid review data');
     }
-},
+  },
 
   async fetchScreenings() {
     try {
-      const response = await fetch(`${API_BASE}/screenings?populate=movie`);
-      const screenings = await response.json();
-      return screenings;
+      let allScreenings = [];
+      let page = 1;
+      let totalPages = 3;
+
+      while (page <= totalPages) {
+        const url = `${API_BASE}/screenings?populate=movie&pagination[page]=${page}`;
+        const response = await fetch(url);
+        const screenings = await response.json();
+        allScreenings = allScreenings.concat(screenings.data);
+        page++;
+      }
+      return allScreenings;
     } catch (error) {
       console.error('Error fetching screenings:', error);
       throw error;
     }
   }
+
 }
 
 export default cmsAdapter;
