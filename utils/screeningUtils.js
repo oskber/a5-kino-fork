@@ -4,7 +4,6 @@ import cmsAdapter from "../src/cmsAdapt.js";
 export async function mapScreenings() {
     try {
         const allScreenings = await cmsAdapter.fetchScreenings();
-        console.log('All Screenings:', allScreenings); // Logga datan för felsökning
         const updatedScreenings = allScreenings.map(properties => ({
             id: properties.id,
             start_time: new Date(properties.attributes.start_time),
