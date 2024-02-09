@@ -1,4 +1,4 @@
-import { imdbRating } from "../utils/omdbApiUtils.js";
+import { imdbRating } from '../utils/omdbApiUtils.js';
 
 /*Fetches all reviews for each movie from CMS then filters the data to remove
 all unverified or invalid reviews. Then the function paginates the array and sets 
@@ -61,6 +61,7 @@ export async function getAverageRating(adapter, id) {
     });
     averageRating = sumRatings / filteredReviews.length;
     maxRating = 5;
+
     if (typeof averageRating === "number") {
       averageRating = Math.ceil(averageRating * 10) / 10;
     } else {
@@ -71,4 +72,12 @@ export async function getAverageRating(adapter, id) {
     maxRating = 10;
   }
   return { rating: averageRating, maxRating: maxRating };
+}
+
+export async function validateReview(review) {
+  if (!review.data.author || !review.data.rating) {
+    return false;
+  } else {
+    return true;
+  }
 }
