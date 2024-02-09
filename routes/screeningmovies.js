@@ -1,5 +1,5 @@
 import express from 'express';
-import { frontpageScreening } from '../utils/screeningUtils.js';
+import { frontpageScreening, movieScreening } from '../utils/screeningUtils.js';
 import cmsAdapter from '../src/cmsAdapt.js';
 const screeningRouter = express.Router();
 
@@ -21,9 +21,8 @@ screeningRouter.get('/coming-screenings', async (req, res) => {
 
 })
 
-screeningRouter.get('/screenings/screenings-details-page/movies/:id', async (req, res) => {
-    const response = await fetch(`https://plankton-app-xhkom.ondigitalocean.app/api/screenings?filters[movie]=${req.params.id}`);
-    const payload = await response.json();
+screeningRouter.get('/screenings-details-page/movies/:id', async (req, res) => {
+    const payload = await movieScreening(req.params.id, cmsAdapter);
     res.json(payload);
 });
 
