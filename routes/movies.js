@@ -1,6 +1,5 @@
 import express from "express";
 import { getMovieById, getMovies } from "../utils/movieUtils.js";
-import { getAverageRating } from "../utils/reviewsUtils.js";
 
 const movieRouter = express.Router();
 
@@ -13,11 +12,6 @@ movieRouter.get("/:id", async (req, res) => {
     res.render("error", { message: `No movie with ID ${id} found` });
     return;
   }
-  
-  const result = await getAverageRating(id);
-
-  movie.data.rating = result.rating;
-  movie.data.maxRating = result.maxRating;
 
   res.render("movie", { movie: movie.data });
 });
@@ -29,18 +23,7 @@ movieRouter.get("/", async (req, res) => {
     res.render("error", { message: "No movies found" });
     return;
   }
-
-  const moviesWithRatings = await Promise.all(
-    movies.data.map(async (movie) => {
-      const result = await getAverageRating(movie.id);
-      return {
-        ...movie,
-        rating: result.rating,
-        maxRating: result.maxRating,
-      };
-    })
-  );
-  res.render("movies", { movies: moviesWithRatings });
+  res.render("movies", { movies: movies.data });
 });
 
 export default movieRouter;
