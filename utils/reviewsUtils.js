@@ -1,5 +1,5 @@
 import { API_BASE } from "../routes/api.js";
-import { imdbRating } from "../utils/omdbApiUtils.js"; 
+import { imdbRating } from "../utils/omdbApiUtils.js";
 import fetch from "node-fetch";
 
 /*Fetches all reviews for each movie from CMS then filters the data to remove
@@ -8,7 +8,7 @@ the pagesize to 5*/
 export async function getReviewsSizeFive(adapter, id, page) {
   const payload = await adapter.loadMoviesReviews(id);
 
-  const modifiedArr = payload.data.map((obj) => ({
+  const modifiedArr = payload.map((obj) => ({
     id: obj.id,
     ...obj.attributes,
   }));
@@ -34,14 +34,17 @@ export function paginateSizeFive(page, arr) {
   return paginatedArr;
 }
 //Function that filters out reviews that aren't verified
-export function filterVerified(arr) {
-  return arr.filter((obj) => {
-    return obj.verified && (obj.rating || obj.rating === 0);
-  });
+
+export function filterVerified(arr){
+    return arr.filter((obj) => {
+
+      return obj.verified && (obj.rating || obj.rating === 0) && 0 <= obj.rating && obj.rating <= 5;
+
+  })
 }
 
 export async function postReview(cmsAdapter, review) {
-    await cmsAdapter.postReview(review);
+  await cmsAdapter.postReview(review);
 }
 
 async function getMovieReview(id) {
@@ -49,30 +52,32 @@ async function getMovieReview(id) {
   const payload = await res.json();
   const modifiedArr = payload.data.map((obj) => ({
     id: obj.id,
-    ...obj.attributes
-  }))
+    ...obj.attributes,
+  }));
   return modifiedArr;
 }
 
 export async function getAverageRating(id) {
   const reviewsList = await getMovieReview(id);
-  const imdbRes =  await imdbRating(id);
+  const imdbRes = await imdbRating(id);
   let averageRating, maxRating;
   if (reviewsList.length >= 5) {
     let sumRatings = 0;
     reviewsList.forEach((review) => {
       sumRatings += review.rating;
-    }
-    )
+    });
     averageRating = sumRatings / reviewsList.length;
     maxRating = 5;
-  }else {
+
+    if (typeof averageRating === "number") {
+      averageRating = Math.ceil(averageRating * 10) / 10;
+    } else {
+      averageRating = 0;
+    }
+  } else {
     averageRating = imdbRes;
     maxRating = 10;
   }
-  let results = {
-    rating: averageRating,
-    maxRating: maxRating,
-  }
-  return results;
+
+  return { rating: averageRating, maxRating: maxRating };
 }

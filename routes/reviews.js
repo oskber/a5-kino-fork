@@ -13,11 +13,11 @@ reviewRouter.get('/movies/:id/reviews/:page', async (req, res) => {
   res.json(payload);
 });
 
-
 reviewRouter.get('/movies/:id/ratings', async (req, res) => {
 const payload = await getAverageRating( req.params.id);
   res.status(200).json(payload);
 });
+
 reviewRouter.post('/reviews', async (req, res) => {
   try {
     await postReview(cmsAdapter, req.body);
