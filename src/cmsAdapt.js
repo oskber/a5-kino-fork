@@ -38,6 +38,11 @@ const cmsAdapter = {
       console.error('Error fetching screenings:', error);
       throw error;
     }
+  },
+  async fetchMovieScreenings(id) {
+    const response = await fetch(`${API_BASE}/screenings?filters[movie]=${id}`);
+    const payload = await response.json();
+    return payload;
   }
 }
 
