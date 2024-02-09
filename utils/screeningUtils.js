@@ -61,7 +61,7 @@ export async function movieScreening(id, adapter) {
         const startTime = screening.attributes.start_time.slice(0, -8);
         const startTimes = startTime.split("T");
         const dateNotPassed = !dateHasPassed(new Date(startTimes[0]), startTimes[1]);
-        return false;
+        return dateNotPassed;
     });
     return filteredData;
 }
