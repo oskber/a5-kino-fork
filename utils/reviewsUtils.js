@@ -1,6 +1,4 @@
-import { API_BASE } from "../routes/api.js";
 import { imdbRating } from "../utils/omdbApiUtils.js";
-import fetch from "node-fetch";
 
 /*Fetches all reviews for each movie from CMS then filters the data to remove
 all unverified or invalid reviews. Then the function paginates the array and sets 
@@ -34,15 +32,12 @@ export function paginateSizeFive(page, arr) {
   return paginatedArr;
 }
 //Function that filters out reviews that aren't verified
-export function filterVerified(arr) {
-  return arr.filter((obj) => {
-    return (
-      obj.verified &&
-      (obj.rating || obj.rating === 0) &&
-      0 <= obj.rating &&
-      obj.rating <= 5
-    );
-  });
+export function filterVerified(arr){
+    return arr.filter((obj) => {
+
+      return obj.verified && (obj.rating || obj.rating === 0) && 0 <= obj.rating && obj.rating <= 5;
+
+  })
 }
 
 //skriv här
