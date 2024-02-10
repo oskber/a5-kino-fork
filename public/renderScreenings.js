@@ -13,6 +13,7 @@ fetchScreenings().then((payload) => {
     const startTime = element.attributes.start_time.slice(0, -8);
     const startTimes = startTime.split("T");
     const screeningsListItem = document.createElement("li");
+    screeningsListItem.classList.add('font-semibold');
     screeningsListItem.innerText = `${startTimes[0]} ${startTimes[1]} - Salong: ${element.attributes.room}`;
     screeningsContent.appendChild(screeningsListItem);
   });
