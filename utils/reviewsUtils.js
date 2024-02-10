@@ -1,4 +1,4 @@
-import { imdbRating } from '../utils/omdbApiUtils.js';
+import { imdbAdapter } from '../utils/omdbApiUtils.js';
 
 /*Fetches all reviews for each movie from CMS then filters the data to remove
 all unverified or invalid reviews. Then the function paginates the array and sets 
@@ -45,14 +45,14 @@ export async function postReview(cmsAdapter, review) {
   await cmsAdapter.postReview(review);
 }
 
-export async function getAverageRating(adapter, id) {
+export async function getAverageRating(adapter, id, imdbAdapter) {
   const payload = await adapter.loadMoviesReviews(id);
   const modifiedArr = payload.map((obj) => ({
     id: obj.id,
     ...obj.attributes,
   }));
   let filteredReviews = filterVerified(modifiedArr);
-  const imdbRes = await imdbRating(id);
+  const imdbRes = await imdbAdapter.imdbRating(id);
   let averageRating, maxRating;
   if (filteredReviews.length >= 5) {
     let sumRatings = 0;

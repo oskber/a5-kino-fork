@@ -62,7 +62,7 @@ describe('getReviewsSizeFive', () => {
   })
 });
 
-function mockedReview(attributes) {
+export function mockedReview(attributes) {
   return {
     id: 307,
     attributes: {
