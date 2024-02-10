@@ -75,7 +75,7 @@ export async function getAverageRating(adapter, id, imdbAdapter) {
 }
 
 export async function validateReview(review) {
-  if (!review.data.author || !review.data.rating) {
+  if (!review.data.author || review.data.rating < 0 || review.data.rating > 5) {
     return false;
   } else {
     return true;
