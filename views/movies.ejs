@@ -16,7 +16,7 @@
         <%- include('./partials/sidebar', { active: '/movies' }) %>
             <section class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 row-auto p-8">
                 <%- include('./partials/getMovies', { hrefText: 'Mer info' , href: `/movies/`, showIntro: false,
-                    showReviews: false }) %>
+                    showReviews: false, showScreenings: false }) %>
             </section>
     </main>
 </body>

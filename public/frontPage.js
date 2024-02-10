@@ -17,7 +17,7 @@ class RenderScreenings {
 
         screenings.forEach(screening => {
             const screeningLi = document.createElement('li');
-            screeningLi.style = 'font-size: 1.5rem; font-weight: bold;'
+            screeningLi.classList.add('font-semibold', 'text-xl')
             const startTime = screening.start_time.slice(0, -8);
             const startTimes = startTime.replace('T', ' ')
             screeningLi.textContent = `${screening.movie.title} - ${startTimes} - Salong: ${screening.room}`
