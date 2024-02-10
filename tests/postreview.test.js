@@ -25,7 +25,7 @@ describe(validateReview, () => {
     const review = {
       "data": {
         "comment": "test",
-        "rating": 5,
+        "rating": 0,
         "author": "testkillen",
         "verified": true,
         "movie": 5,

@@ -7,7 +7,7 @@ async function handleReviewForm(event) {
   const commentInput = document.querySelector('.review-comment');
   const authorInput = document.querySelector('.review-author');
   const ratingInput = document.querySelector('input[name="rating"]:checked');
-  const selectedRating = parseInt(ratingInput.value, 10);
+  const selectedRating = ratingInput ? parseInt(ratingInput.value, 10) : 0;
   const url = new URL(window.location.href);
   const movieId = url.pathname.replace('/movies/', '');
 
