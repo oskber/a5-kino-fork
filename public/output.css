@@ -560,6 +560,10 @@ video {
   top: 0px;
 }
 
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
 .col-start-1 {
   grid-column-start: 1;
 }
@@ -582,6 +586,10 @@ video {
 
 .row-span-1 {
   grid-row: span 1 / span 1;
+}
+
+.row-span-6 {
+  grid-row: span 6 / span 6;
 }
 
 .row-start-1 {
@@ -713,6 +721,14 @@ video {
 
 .list-none {
   list-style-type: none;
+}
+
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.auto-rows-fr {
+  grid-auto-rows: minmax(0, 1fr);
 }
 
 .grid-cols-1 {
