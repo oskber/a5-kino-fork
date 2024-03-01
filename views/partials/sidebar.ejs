@@ -1,7 +1,7 @@
-<aside class="bg-secondary sticky top-0 max-h-screen">
-    <img class="p-4 mb-10" src="../bihjografenlogo.png" alt="Bihjografen logotyp">
-    <ul class="flex flex-col gap-20 pl-4 text-white text-3xl font-bold">
-        <% const links = [ { href: '/', text: 'Hem' }, { href: '/movies', text: 'Filmer' }, { href: '/about', text: 'Om oss' }, { href: '/login', text: 'Logga in' }, { href: '/signup', text: 'Registrera' } ] %>
+<aside class="bg-secondary sticky top-0 min-h-full">
+    <a href="/"><img class="p-4 mb-10 cursor-pointer" src="../bihjografenlogo.png" alt="Bihjografen logotyp"></a>
+    <ul class="flex flex-col gap-10 pl-4 text-[#FFA500] text-3xl font-bold">
+        <% const links = [ { href: '/', text: 'Hem' }, { href: '/movies', text: 'Filmer' }, { href: '/about', text: 'Om oss' }, { href: '/login', text: 'Logga in' } ] %>
         <% links.forEach(link => { %>
         <li class="px-8 py-4 ml-4 <%= link.href === active ? 'active' : '' %>"><a href="<%= link.href %>"><%= link.text %></a></li>
         <% }) %>

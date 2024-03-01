@@ -12,7 +12,7 @@ async function handleReviewForm(event) {
   const movieId = url.pathname.replace('/movies/', '');
 
   const review = {
-    "data": {
+    data: {
       comment: commentInput.value,
       rating: selectedRating,
       author: authorInput.value,
