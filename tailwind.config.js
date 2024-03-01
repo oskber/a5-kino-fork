@@ -68,5 +68,20 @@ export default {
       ]
     }
   },
+  purge: {
+    enabled: true,
+    content: [
+      "./src/**/*.{html,js,ejs}",
+      "./public/**/*.{html,js,ejs}",
+      "./views/**/*.{html,js,ejs}"
+    ],
+    safelist: [
+      // Add classes or selectors here that you want to be excluded from purging
+      "text-green-400",
+      "text-red-400",
+      /^bg-/, // This will safelist all classes starting with 'bg-'
+      // Add more safelisted classes or selectors as needed
+    ],
+  },
   plugins: [],
 }
