@@ -3,7 +3,7 @@
     <ul class="flex flex-col gap-10 pl-4 text-[#FFA500] text-3xl font-bold">
         <% const links = [ { href: '/', text: 'Hem' }, { href: '/movies', text: 'Filmer' }, { href: '/about', text: 'Om oss' }, { href: '/login', text: 'Logga in' } ] %>
         <% links.forEach(link => { %>
-        <li class="px-8 py-4 ml-4 <%= link.href === active ? 'active' : '' %>"><a href="<%= link.href %>"><%= link.text %></a></li>
+        <li class="hover:text-[#ffcb6a] px-8 py-4 ml-4 <%= link.href === active ? 'active' : '' %>"><a href="<%= link.href %>"><%= link.text %></a></li>
         <% }) %>
     </ul>
 </aside>
