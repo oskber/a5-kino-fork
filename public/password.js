@@ -8,7 +8,6 @@ const specialChar = document.getElementById('specialChar');
 function checkCondition(element, regex) {
   if (regex.test(passwordField.value)) {
     element.classList.add('text-green-400');
-    element.classList.remove('text-red-400');
     element
       .querySelector('.fa-circle-exclamation')
       ?.classList.add('fa-circle-check');
@@ -16,7 +15,6 @@ function checkCondition(element, regex) {
       .querySelector('.fa-circle-check')
       ?.classList.remove('fa-circle-exclamation');
   } else {
-    element.classList.add('text-red-400');
     element.classList.remove('text-green-400');
     element
       .querySelector('.fa-circle-check')
